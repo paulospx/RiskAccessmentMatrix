@@ -1,0 +1,181 @@
+[
+  {
+    "probability": "Highly Unlikely",
+    "consequence": "Extensive",
+    "text": "21",
+    "description": "",
+    "color": "red"
+  },
+  {
+    "probability": "Unlikely",
+    "consequence": "Extensive",
+    "text": "22",
+    "description": "",
+    "color": "red"
+  },
+  {
+    "probability": "Possible",
+    "consequence": "Extensive",
+    "text": "23",
+    "description": "",
+    "color": "red"
+  },
+  {
+    "probability": "Likely",
+    "consequence": "Extensive",
+    "text": "24",
+    "description": "",
+    "color": "red"
+  },
+  {
+    "probability": "Very likely",
+    "consequence": "Extensive",
+    "text": "25",
+    "description": "",
+    "color": "red"
+  },
+
+  {
+    "probability": "Highly Unlikely",
+    "consequence": "Major",
+    "text": "16",
+    "description": "",
+    "color": "yellow"
+  },
+  {
+    "probability": "Unlikely",
+    "consequence": "Major",
+    "text": "17",
+    "description": "",
+    "color": "yellow"
+  },
+  {
+    "probability": "Possible",
+    "consequence": "Major",
+    "text": "18",
+    "description": "",
+    "color": "yellow"
+  },
+  {
+    "probability": "Likely",
+    "consequence": "Major",
+    "text": "19",
+    "description": "",
+    "color": "red"
+  },
+  {
+    "probability": "Very likely",
+    "consequence": "Major",
+    "text": "20",
+    "description": "",
+    "color": "red"
+  },
+
+  {
+    "probability": "Highly Unlikely",
+    "consequence": "Medium",
+    "text": "11",
+    "description": "",
+    "color": "green"
+  },
+  {
+    "probability": "Unlikely",
+    "consequence": "Medium",
+    "text": "12",
+    "description": "",
+    "color": "yellow"
+  },
+  {
+    "probability": "Possible",
+    "consequence": "Medium",
+    "text": "13",
+    "description": "",
+    "color": "yellow"
+  },
+  {
+    "probability": "Likely",
+    "consequence": "Medium",
+    "text": "14",
+    "description": "",
+    "color": "yellow"
+  },
+  {
+    "probability": "Very likely",
+    "consequence": "Medium",
+    "text": "15",
+    "description": "",
+    "color": "red"
+  },
+
+  {
+    "probability": "Highly Unlikely",
+    "consequence": "Minor",
+    "text": "6",
+    "description": "",
+    "color": "green"
+  },
+  {
+    "probability": "Unlikely",
+    "consequence": "Minor",
+    "text": "7",
+    "description": "",
+    "color": "green"
+  },
+  {
+    "probability": "Possible",
+    "consequence": "Minor",
+    "text": "8",
+    "description": "",
+    "color": "yellow"
+  },
+  {
+    "probability": "Likely",
+    "consequence": "Minor",
+    "text": "9",
+    "description": "",
+    "color": "yellow"
+  },
+  {
+    "probability": "Very likely",
+    "consequence": "Minor",
+    "text": "10",
+    "description": "",
+    "color": "yellow"
+  },
+
+  {
+    "probability": "Highly Unlikely",
+    "consequence": "No Impact",
+    "text": "1",
+    "description": "",
+    "color": "green"
+  },
+  {
+    "probability": "Unlikely",
+    "consequence": "No Impact",
+    "text": "2",
+    "description": "",
+    "color": "green"
+  },
+  {
+    "probability": "Possible",
+    "consequence": "No Impact",
+    "text": "3",
+    "description": "",
+    "color": "green"
+  },
+  {
+    "probability": "Likely",
+    "consequence": "No Impact",
+    "text": "4",
+    "description": "",
+    "color": "green"
+  },
+  {
+    "probability": "Very likely",
+    "consequence": "No Impact",
+    "text": "5",
+    "description": "",
+    "color": "green"
+  }
+]

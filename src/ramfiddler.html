@@ -1,0 +1,310 @@
+<html>
+<head>
+    <title>
+        Risk Assessment Matrix
+    </title>
+    <link href="https://unpkg.com/ace-css/css/ace.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/ace/1.1.01/ace.js" type="text/javascript"></script>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+	<script src="http://d3js.org/d3.v3.min.js"></script>
+    <script src="js/ram.js"></script>
+    <script src="http://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>
+</head>
+<body>
+<div class="header" style="background-color:#eee;">
+  
+    <h1 style="display:inline-block">☁️</h1>
+    <button class="header" onclick="run()">Run</button>
+    <button class="header" onclick="save()">Save</button>
+    <button class="header" onclick="foldAll()">Fold</button>
+</div>
+<div class="page" id="content" style="padding:20px;">
+    <div id="matrix" style="padding:5px"></div>
+    <canvas width="960" height="500" style="display:none"></canvas>
+    <div class="alert alert-warning alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <strong>Assessment</strong> <span id="message">Mouse on over the squares appears here!<span>
+    </div>
+    <button type="button" class="btn btn-default" onclick="HzRam.download()">
+        <span class="glyphicon glyphicon-download" aria-hidden="true"></span> Download Image
+    </button>
+</div>
+<textarea id="xml_editor" style="width:500px;height:400px">[
+    {
+    "probability": "Highly Unlikely",
+    "consequence": "No Impact",
+    "text": "1",
+    "description": "",
+    "color": "#0F0"
+    },
+    {
+    "probability": "Unlikely",
+    "consequence": "No Impact",
+    "text": "2",
+    "description": "",
+    "color": "#0F0"
+    },
+    {
+    "probability": "Possible",
+    "consequence": "No Impact",
+    "text": "3",
+    "description": "",
+    "color": "#0F0"
+    },
+    {
+    "probability": "Likely",
+    "consequence": "No Impact",
+    "text": "4",
+    "description": "",
+    "color": "#0F0"
+    },
+    {
+    "probability": "Very likely",
+    "consequence": "No Impact",
+    "text": "5",
+    "description": "",
+    "color": "#0F0"
+    },
+    {
+    "probability": "Highly Unlikely",
+    "consequence": "Minor",
+    "text": "6",
+    "description": "",
+    "color": "#0F0"
+    },
+    {
+    "probability": "Unlikely",
+    "consequence": "Minor",
+    "text": "7",
+    "description": "",
+    "color": "#0F0"
+    },
+    {
+    "probability": "Possible",
+    "consequence": "Minor",
+    "text": "8",
+    "description": "",
+    "color": "#ffff00"
+    },
+    {
+    "probability": "Likely",
+    "consequence": "Minor",
+    "text": "9",
+    "description": "",
+    "color": "#ffff00"
+    },
+    {
+    "probability": "Very likely",
+    "consequence": "Minor",
+    "text": "10",
+    "description": "",
+    "color": "#ffff00"
+    },
+    {
+    "probability": "Highly Unlikely",
+    "consequence": "Medium",
+    "text": "11",
+    "description": "",
+    "color": "#0F0"
+    },
+    {
+    "probability": "Unlikely",
+    "consequence": "Medium",
+    "text": "12",
+    "description": "",
+    "color": "#ffff00"
+    },
+    {
+    "probability": "Possible",
+    "consequence": "Medium",
+    "text": "13",
+    "description": "",
+    "color": "#ffff00"
+    },
+    {
+    "probability": "Likely",
+    "consequence": "Medium",
+    "text": "14",
+    "description": "",
+    "color": "#ffff00"
+    },
+    {
+    "probability": "Very likely",
+    "consequence": "Medium",
+    "text": "15",
+    "description": "",
+    "color": "#F00"
+    },
+    {
+    "probability": "Highly Unlikely",
+    "consequence": "Major",
+    "text": "16",
+    "description": "",
+    "color": "#ffff00"
+    },
+    {
+    "probability": "Unlikely",
+    "consequence": "Major",
+    "text": "17",
+    "description": "",
+    "color": "#ffff00"
+    },
+    {
+    "probability": "Possible",
+    "consequence": "Major",
+    "text": "18",
+    "description": "",
+    "color": "#ffff00"
+    },
+    {
+    "probability": "Likely",
+    "consequence": "Major",
+    "text": "19",
+    "description": "",
+    "color": "#F00"
+    },
+    {
+    "probability": "Very likely",
+    "consequence": "Major",
+    "text": "20",
+    "description": "",
+    "color": "#F00"
+    },
+    {
+    "probability": "Highly Unlikely",
+    "consequence": "Extensive",
+    "text": "21",
+    "description": "",
+    "color": "#F00"
+    },
+    {
+    "probability": "Unlikely",
+    "consequence": "Extensive",
+    "text": "22",
+    "description": "",
+    "color": "#F00"
+    },
+    {
+    "probability": "Possible",
+    "consequence": "Extensive",
+    "text": "23",
+    "description": "",
+    "color": "#F00"
+    },
+    {
+    "probability": "Likely",
+    "consequence": "Extensive",
+    "text": "24",
+    "description": "",
+    "color": "#F00"
+    },
+    {
+    "probability": "Very likely",
+    "consequence": "Extensive",
+    "text": "25",
+    "description": "",
+    "color": "#F00"
+    }
+    ]</textarea>
+</body>
+<script>
+
+
+    var options = {
+        page: "1",
+        pdfOpenParams: {
+            view: 'FitV',
+            pagemode: 'thumbs',
+            search: 'lorem ipsum'
+        }
+    };
+    function foldAll() {
+
+
+    }
+   
+    function display(probability, consequence, title, description) {
+        $("#message").html(probability + " " + consequence );
+    }
+
+    function select(probability, consequence, title, description) {
+
+    }
+
+
+    function makeid() {
+        var text = "";
+        var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+        for (var i = 0; i < 5; i++)
+            text += possible.charAt(Math.floor(Math.random() * possible.length));
+        return text;
+    }
+
+    function writeMatrix(matrix) {
+        var matrixId = makeid();
+        // TODO : add matrix to the editor
+        return matrixId;
+    }
+
+  function save() {
+    // todo save matrix
+
+    }
+
+
+  function getParameter(parameterName) {
+      var result = null,
+          tmp = [];
+      var items = location.search.substr(1).split("&");
+      for (var index = 0; index < items.length; index++) {
+          tmp = items[index].split("=");
+          if (tmp[0] === parameterName) result = decodeURIComponent(tmp[1]);
+      }
+      return result;
+  }
+
+  function insertParam(key, value) {
+      key = encodeURI(key); value = encodeURI(value);
+      var kvp = document.location.search.substr(1).split('&');
+      var i = kvp.length; var x; while (i--) {
+          x = kvp[i].split('=');
+
+          if (x[0] == key) {
+              x[1] = value;
+              kvp[i] = x.join('=');
+              break;
+          }
+      }
+      if (i < 0) { kvp[kvp.length] = [key, value].join('='); }
+      document.location.search = kvp.join('&');
+  }
+
+  // read json from file url
+
+
+  function run() {
+        $("#matrix").html("");
+        const matrix = document.getElementById("xml_editor").value;
+        var list = JSON.parse(matrix);
+        var options = {
+            id:'#matrix',
+            list: list,
+            square_size: 50,
+            matrix_size: 5,
+            onclick: select,
+            onhover: display
+        };
+        HzRam.show(options);
+    }
+   
+  $(document).ready(function () {
+      //var k = getParameter("key");
+      //console.log(k); 
+      run();
+
+    });
+</script>
+</html>
