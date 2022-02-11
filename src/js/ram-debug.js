@@ -123,7 +123,7 @@ var HzRam = (function () {
             .attr('color','#DDD')
             .attr('class','ram-subtitle')
             .attr('x', (margin.left / 2) + 10 )
-            .attr('y', width - 90 )
+            .attr('y', width - 100 )
             .attr('style','font-family: "Roboto", sans-serif;font-size: 16px;fill:#999;')
             .text(yaxis);
 
@@ -139,8 +139,6 @@ var HzRam = (function () {
          .attr('y', width + adjust + 20)
          .attr('style','font-family: "Roboto", sans-serif;font-size:10 px;fill:#999;')
          .text(xaxis);
-
-
 
         // Selected Risk Label
         svg.append('g')
@@ -172,7 +170,7 @@ var HzRam = (function () {
 
         svg.selectAll("rect")
             .on('mouseover', function (d, i, z) {
-                var l = d + (z * range);
+                // var l = d + (z * range);
                 var hz = list[i];
                 //onhover(hz.probability, hz.consequence, hz.text, hz.description);
                 if (show_hover) {

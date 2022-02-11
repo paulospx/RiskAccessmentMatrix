@@ -3,28 +3,24 @@
     <title>
         Risk Assessment Matrix
     </title>
-    <link href="https://unpkg.com/ace-css/css/ace.min.css" rel="stylesheet">
     <link rel="stylesheet" href="css/bootstrap.min.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <script src="http://cdnjs.cloudflare.com/ajax/libs/ace/1.1.01/ace.js" type="text/javascript"></script>
-    <script src="https://code.highcharts.com/highcharts.js"></script>
-    <script src="https://code.highcharts.com/modules/exporting.js"></script>
 	<script src="http://d3js.org/d3.v3.min.js"></script>
-    <script src="js/ram.js"></script>
+    <script src="js/ram-debug.js"></script>
     <script src="http://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>
 </head>
 <body>
 <div class="header" style="background-color:#eee;">
   
     <h1 style="display:inline-block">☁️</h1>
-    <button class="header" onclick="run()">Run</button>
-    <button class="header" onclick="save()">Save</button>
-    <button class="header" onclick="foldAll()">Fold</button>
+    <button class="btn btn-primary" onclick="run()">Run</button>
+    <button class="btn btn-primary" onclick="save()">Save</button>
+    <button class="btn btn-primary" onclick="foldAll()">Fold</button>
 </div>
 <div class="page" id="content" style="padding:20px;">
     <div id="matrix" style="padding:5px"></div>
     <canvas width="960" height="500" style="display:none"></canvas>
-    <div class="alert alert-warning alert-dismissible" role="alert">
+    <div class="alert alert-info alert-dismissible" role="alert">
         <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <strong>Assessment</strong> <span id="message">Mouse on over the squares appears here!<span>
     </div>
@@ -32,7 +28,7 @@
         <span class="glyphicon glyphicon-download" aria-hidden="true"></span> Download Image
     </button>
 </div>
-<textarea id="xml_editor" style="width:500px;height:400px">[
+<textarea id="xml_editor" style="width:500px;height:400px;margin: 20px;font-family: monospace;">[
     {
     "probability": "Highly Unlikely",
     "consequence": "No Impact",
@@ -221,6 +217,8 @@
             search: 'lorem ipsum'
         }
     };
+
+
     function foldAll() {
 
 
@@ -286,6 +284,90 @@
 
 
   function run() {
+    $("#matrix").html("");
+    var list = [
+    {
+    "probability": "1 - High Requires immediate action. No workaround available.",
+    "consequence": "1 - High Impact. Configuration Items (CIs) support Business Criticality impacted at either enterprise-wide OR business-unit wide level.",
+    "text": "P1",
+    "description": "",
+    "color": "#C00000"
+    },
+    {
+    "probability": "2 - Medium - xxxx",
+    "consequence": "1 - High Impact. Configuration Items (CIs) support Business Criticality impacted at either enterprise-wide OR business-unit wide level.",
+    "text": "P2",
+    "description": "",
+    "color": "#FE0000"
+    },
+    {
+    "probability": "3 - Low - xxxx",
+    "consequence": "1 - High Impact. Configuration Items (CIs) support Business Criticality impacted at either enterprise-wide OR business-unit wide level.",
+    "text": "P3",
+    "description": "",
+    "color": "#FEFF00"
+    },
+    {
+    "probability": "Likely",
+    "consequence": "No Impact",
+    "text": "P2",
+    "description": "",
+    "color": "#FE0000"
+    },
+    {
+    "probability": "Very likely",
+    "consequence": "No Impact",
+    "text": "P3",
+    "description": "",
+    "color": "#FEFF00"
+    },
+    {
+    "probability": "Highly Unlikely",
+    "consequence": "Minor",
+    "text": "P4",
+    "description": "",
+    "color": "#00AF50"
+    },
+    {
+    "probability": "Unlikely",
+    "consequence": "Minor",
+    "text": "P3",
+    "description": "",
+    "color": "#FEFF00"
+    },
+    {
+    "probability": "Possible",
+    "consequence": "Minor",
+    "text": "P4",
+    "description": "",
+    "color": "#00AF50"
+    },
+    {
+    "probability": "Likely",
+    "consequence": "Minor",
+    "text": "P4",
+    "description": "",
+    "color": "#00AF50"
+    }];
+    var options = {
+        id:'#matrix',
+        list: list,
+        square_size: 100,
+        matrix_size: 3,
+        xaxis : "Urgency",
+        yaxis : "Consequence",
+        onclick: select,
+        onhover: display
+    };
+
+    console.log(options);
+
+    HzRam.show(options);
+    }
+
+
+
+  function run_5x5() {
         $("#matrix").html("");
         const matrix = document.getElementById("xml_editor").value;
         var list = JSON.parse(matrix);
@@ -297,6 +379,9 @@
             onclick: select,
             onhover: display
         };
+
+        console.log(options);
+
         HzRam.show(options);
     }
    
